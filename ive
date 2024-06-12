@@ -1,35 +1,59 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-if [ $# -ne 3 ] && [ $# -ne 4 ]; then
+# Created by wcl, modified by kortaol
+
+if [ $# -ne 3 ] && [ $# -ne 4 ] || [ $1 = "-h" ]; then
 	echo "(arch)Ive - a simple shell script for easier archive management"
 	echo "Usage: ve [COMPRESSION_TYPE (tar or zip)] [ACTION (e for extract, a for archive)] [ARCHIVE_NAME] [FILES (if action is a)]"
 	exit 0
 fi;
-if [ $1 = "tar" ]; then
-	if [ $2 = "e" ]; then
+
+case $1 in
+
+    "tar")
+	case $2 in
+	    "e")
 		tar -xvf $3
-	elif [ $2 = "a" ]; then
+	    ;;
+	    "a")
 		tar -cvJf $3 $4
-	else
+	    ;;
+	    *)
 		echo "Enter a valid action (e for extract, a for archive)"
-	fi;
-elif [ $1 = "zip" ]; then
-	if [ $2 = "e" ]; then
+	    ;;
+	esac
+    ;;
+
+    "zip")
+	case $2 in
+	    "e")
 		filename=$3
 		unzip $3
-	elif [ $2 = "a" ]; then
+	    ;;
+	    "a")
 		zip -r $3 $4
-	else
+	    ;;
+	    *)
 		echo "Enter a valid action (e for extract, a for archive)"
-	fi;
-elif [ $1 = "rar" ]; then
-	if [ $2 = "e" ]; then
+	    ;;
+	esac
+    ;;
+
+    "rar")
+	case $2 in
+	    "e")
 		rar x $3
-	elif [ $2 = "a" ]; then
+	    ;;
+	    "a")
 		rar -r a $3 $4
-	else
+	    ;;
+	    *)
 		echo "Enter a valid action (e for extract, a for archive)"
-	fi;
-else
-	echo "Enter a valid compression type (tar or zip)"
-fi;
+	    ;;
+	esac
+    ;;
+
+    *)
+	echo "Enter a valid compression type (tar, rar or zip)"
+    ;;
+esac
