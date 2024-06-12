@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+if [ $# -ne 3 ] && [ $# -ne 4 ]; then
+	echo "(arch)Ive - a simple shell script for easier archive management"
+	echo "Usage: ve [COMPRESSION_TYPE (tar or zip)] [ACTION (e for extract, a for archive)] [ARCHIVE_NAME] [FILES (if action is a)]"
+	exit 0
+fi;
+if [ $1 = "tar" ]; then
+	if [ $2 = "e" ]; then
+		tar -xvf $3
+	elif [ $2 = "a" ]; then
+		tar -cvJf $3 $4
+	else
+		echo "Enter a valid action (e for extract, a for archive)"
+	fi;
+elif [ $1 = "zip" ]; then
+	if [ $2 = "e" ]; then
+		filename=$3
+		unzip $3
+	elif [ $2 = "a" ]; then
+		zip -r $3 $4
+	else
+		echo "Enter a valid action (e for extract, a for archive)"
+	fi;
+elif [ $1 = "rar" ]; then
+	if [ $2 = "e" ]; then
+		rar x $3
+	elif [ $2 = "a" ]; then
+		rar -r a $3 $4
+	else
+		echo "Enter a valid action (e for extract, a for archive)"
+	fi;
+else
+	echo "Enter a valid compression type (tar or zip)"
+fi;
