@@ -5,7 +5,7 @@ Download ive:
 ```
 git clone https://github.com/wfclCamelCase/ive
 cd ive
-chmod +x ./ive
+chmod +x ./*
 ```
 ```
 ./ive [COMPRESSION_TYPE (tar, zip or rar)] [ACTION (e for extract, a for archive)] [ARCHIVE_NAME] [FILES (if action is a)]
@@ -13,6 +13,10 @@ chmod +x ./ive
 To use the script comfortably you might consider adding it to $PATH by adding the following code to your .bashrc/.bash_profile/.zshrc:
 ```
 export PATH=$PATH:/path/to/ive
+```
+or using `./install.sh`, which will install ive to your `~/.local/bin`:
+```
+./install.sh
 ```
 ## Examples:
 1. Create a zip archive "browser.zip" from the "tor-browser" directory:
